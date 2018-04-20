@@ -1,0 +1,46 @@
+.icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
+*{margin:0; padding:0;}
+li{list-style:none;}
+img{border:none;}
+a{text-decoration:none;}
+.hidden{display: none;}
+.errMsg{text-align: center;color: red;}
+input,textarea{outline:none; resize:none; border:none;}
+.clearfix:after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0;}
+.clearfix{*zoom:1;}
+/*轮播图*/
+div.ppt{margin: 5px auto;width: 80%;}
+.carousel-item img{max-width: 100%;height:25vw;}
+
+/*轮播图结束*/
+.container{margin-top: 1rem;padding: 0;}
+.item-user{height: 1.5rem;}
+.name{margin-top:0.7rem;margin-left:1.2rem;color: red;}
+
+
+.rounded-circle{width: 2.2rem;}
+/*返回顶部*/
+div.toTop{position: fixed;bottom: 2rem;right: 2rem;}
+.toTop a{font-size: 1.5rem;}
+/*返回顶部结束*/
+
+/*底部*/
+.footer{height: 7rem;background: blue;margin: 0 auto;width: 100%;}
+.footer ul {display: flex;margin: 2rem auto 0 auto;justify-content:center;}
+.footer ul li{padding: 1.2rem;text-align: center;}
+.footer p{text-align: center;color: white;}
+/*底部结束*/
+
+.content-item li{
+	margin-bottom: 0.8rem;
+	padding: 0.5rem;
+}
+img.card-img-top{
+	width: 100%;
+	height: 17rem;
+}

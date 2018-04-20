@@ -1,0 +1,22 @@
+注册用户表结构：user.js
+
+1，userName			String					用户名
+2，userPwd			String					密码
+3，userPhone			Number					用户电话
+4，sex				Strimg					性别
+5，headimgSrc		String					头像图片地址
+
+
+
+
+作品结构表：works.js
+
+1,author			String					作者
+2,userId			String					作者ID
+3,title				String					标题
+3,content			String					内容
+4,worksSrc			String					作品图片地址
+5,time				String					发布时间
+6,zan				Number					赞个数
+7,comment			Number					评论数
+

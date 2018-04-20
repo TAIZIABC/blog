@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/jquery-3.1.0.min.js"></script>
+</head>
+<body>
+<form class="form-horizontal" enctype='multipart/form-data' method='post' action='javascript:;'>
+  <input type="file" multiple="multiple" id="choose"/>
+  <button onclick="handle()">上传</button>
+  <img class="newImg"/>
+</form>
+ 
+<script>
+  function handle() {
+   //获取上传的File对象，此处是一张图片对象
+    let file = document.getElementById("choose").files[0];
+    let formData = new FormData();
+    formData.append("avatar", file);//设置key为avartar,value为上述的File对象
+    $.ajax({
+      type: 'POST',
+      url: '/file_upload',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (data) {
+        $(".newImg").attr("src", data.filePath);//上传成功则图片显示
+      },
+      error: function (err) {
+        console.log(err.message);
+      }
+    })
+  }
+</script>
+</body>
+</html>
