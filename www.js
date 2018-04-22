@@ -22,14 +22,13 @@ app.use(bodyParser.urlencoded({extended:false}));
   app.engine('.html', require('ejs').__express);  
   app.set('view engine', 'html'); 
 
-app.get("/",function(req,res){
+app.get("/",function(req,res,next){
 	if(req.cookies.userId){
 		res.redirect("/admin");
 	}else{
 		Works.find().sort( { $natural: -1 } ).limit(8).then(function(doc){
 			res.render("login_index",{worksMsg: doc});
 		})
-		
 	}
 })
 
@@ -39,7 +38,7 @@ app.use("/api",require("./router/api"));
 //管理员路由
 app.use("/admin",require("./router/admin"));
 //用户路由
-app.use("./user",require("./router/user"));
+app.use("/user",require("./router/user"));
 
 
 mongoose.connect("mongodb://localhost/blog",function(err){

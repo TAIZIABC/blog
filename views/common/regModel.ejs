@@ -1,0 +1,53 @@
+<div class="modal fade" id="resModel" tabindex="-1" role="dialog" aria-labelledby="resModel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel">
+							注册
+						</h4>
+			</div>
+			<div class="modal-body">
+
+				<div class="form-group">
+					<label for="userName">用户名：</label>
+					<input type="text" class="form-control" id="userName" placeholder="">
+				</div>
+				<div class="form-group">
+					<label for="passward">密码：</label>
+					<input type="password" class="form-control" id="passward" placeholder="">
+				</div>
+				<div class="form-group">
+					<label for="tel">手机号码：</label>
+					<input type="tel" class="form-control" id="tel" placeholder="">
+				</div>
+				<div class="form-group">
+					<label for="">性别：</label>
+					<input type="radio" name="sex" checked="checked" value="男" />男
+					<input type="radio" name="sex" value="女" />女
+				</div>
+				<div class="form-group">
+					<label for="tel">地区：</label>
+					<div data-toggle="distpicker">
+						<div class="form-group">
+							<label class="sr-only" for="province2">Province</label>
+							<select class="form-control" id="province2" data-province="---- 选择省 ----"></select>
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="city2">City</label>
+							<select class="form-control" id="city2" data-city="---- 选择市 ----"></select>
+						</div>
+						<div class="form-group">
+							<label class="sr-only" for="district2">District</label>
+							<select class="form-control" id="district2" data-district="---- 选择区 ----"></select>
+						</div>
+					</div>
+				</div>
+				<p class="errMsg" id="errMsg"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" id="register">注册</button>
+			</div>
+		</div>
+	</div>
+</div>

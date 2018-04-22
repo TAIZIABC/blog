@@ -43,126 +43,14 @@
 		<!--导航栏结束-->
 
 		<!--登入窗口-->
-		<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">
-							登入
-						</h4>
-					</div>
-					<div class="modal-body">
-						<form>
-							<div class="form-group">
-								<label for="log_name">用户名：</label>
-								<input type="text" class="form-control" id="log_name" placeholder="">
-							</div>
-							<div class="form-group">
-								<label for="log_passward">密码：</label>
-								<input type="password" class="form-control" id="log_passward" placeholder="">
-							</div>
-						</form>
-						<p class="errMsg" id="login_msg" ></p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" class="btn btn-primary" id="login">登入</button>
-					</div>
-				</div>
-			</div>
-		</div>
+			<% include ./common/loginModel.ejs %>
 		<!--登入框结束-->
 
 		<!--注册框-->
-		<div class="modal fade" id="resModel" tabindex="-1" role="dialog" aria-labelledby="resModel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">
-							注册
-						</h4>
-					</div>
-					<div class="modal-body">
-						
-							<div class="form-group">
-								<label for="userName">用户名：</label>
-								<input type="text" class="form-control" id="userName" placeholder="">
-							</div>
-							<div class="form-group">
-								<label for="passward">密码：</label>
-								<input type="password" class="form-control" id="passward" placeholder="">
-							</div>
-							<div class="form-group">
-								<label for="tel">手机号码：</label>
-								<input type="tel" class="form-control" id="tel" placeholder="">
-							</div>
-							<div class="form-group">
-								<label for="">性别：</label>
-								<input type="radio" name="sex" checked="checked" value="男"/>男
-								<input type="radio" name="sex" value="女"/>女
-							</div>
-							<div class="form-group">
-								<label for="tel">地区：</label>
-								<div data-toggle="distpicker">
-									<div class="form-group">
-										<label class="sr-only" for="province2">Province</label>
-										<select class="form-control" id="province2" data-province="---- 选择省 ----"></select>
-									</div>
-									<div class="form-group">
-										<label class="sr-only" for="city2">City</label>
-										<select class="form-control" id="city2" data-city="---- 选择市 ----"></select>
-									</div>
-									<div class="form-group">
-										<label class="sr-only" for="district2">District</label>
-										<select class="form-control" id="district2" data-district="---- 选择区 ----"></select>
-									</div>
-								</div>
-							</div>
-							<p class="errMsg" id="errMsg"></p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" class="btn btn-primary" id="register">注册</button>
-					</div>
-				</div>
-			</div>
-		</div>
+			<% include ./common/regModel.ejs %>
 		<!--注册框结束-->
 		<!--轮播图-->
-		<div class="ppt">
-			<div id="demo" class="carousel slide" data-ride="carousel">
-
-				<!-- 指示符 -->
-				<ul class="carousel-indicators">
-					<li data-target="#demo" data-slide-to="0" class="active"></li>
-					<li data-target="#demo" data-slide-to="1"></li>
-					<li data-target="#demo" data-slide-to="2"></li>
-				</ul>
-
-				<!-- 轮播图片 -->
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522256171650&di=a9128dfcc6a0ca017373bece769a732a&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dpixel_huitu%252C0%252C0%252C294%252C40%2Fsign%3D867729432ba446236ac7ad22f15a1762%2F37d3d539b6003af3d1d28f593e2ac65c1038b69b.jpg">
-					</div>
-					<div class="carousel-item">
-						<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522256171647&di=d671953e0813fd4baab0cd8d3a14c212&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D624a946508087bf469e15faa9aba3d59%2F0bd162d9f2d3572c6e0037f28013632762d0c33a.jpg">
-					</div>
-					<div class="carousel-item">
-						<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522256171646&di=39b3179891d38d7b47757aab16a028df&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimage%2Fc0%253Dshijue1%252C0%252C0%252C294%252C40%2Fsign%3D6a5bf667a3ec8a1300175fa39f6afbfa%2F622762d0f703918f9d9bef425b3d269758eec4f4.jpg">
-					</div>
-				</div>
-
-				<!-- 左右切换按钮 -->
-				<a class="carousel-control-prev" href="#demo" data-slide="prev">
-					<span class="carousel-control-prev-icon"></span>
-				</a>
-				<a class="carousel-control-next" href="#demo" data-slide="next">
-					<span class="carousel-control-next-icon"></span>
-				</a>
-
-			</div>
-		</div>
-
+			<% include ./common/slide.ejs %>
 		<!--轮播图结束-->
 
 		<!--列表内容-->
@@ -176,7 +64,7 @@
 							<div class="card-body">
 								<div class="item-user">
 									<img src="<%=worksMsg[i].authorHeadImg%>" alt="..." class="rounded-circle">
-									<span class="name">发布人：<a href=""><%=worksMsg[i].author%></a></span>
+									<span class="name">发布人：<a href="/user/user_info?userId=<%=worksMsg[i].userId%>"><%=worksMsg[i].author%></a></span>
 								</div>
 								<hr />
 								<h5 class="card-title"><a href="works-message.html"><%=worksMsg[i].title%></a></h5>
@@ -198,26 +86,7 @@
 					</div>
 				</ul>
 			<!--分页-->
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<li class="page-item disabled">
-						<a class="page-link" href="#" tabindex="-1">上一页</a>
-					</li>
-					<li class="page-item active">
-						<a class="page-link " href="#">1</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">2</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">3</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">下一页</a>
-					</li>
-				</ul>
-			</nav>
-
+				<% include ./common/page.ejs %>
 			<!--分页结束-->
 
 		</div>
@@ -254,7 +123,7 @@
 				</button>
 		</div>
 		<!--返回顶部结束-->
-		<script src="../public/js/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_ljh2pjvbi03k57b9.js"></script>
 		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="public/js/distpicker.data.js"></script>

@@ -12,51 +12,7 @@
 	<body>
 
 		<!--导航栏-->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">导航</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    			<span class="navbar-toggler-icon"></span>
-  			</button>
-
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="/">主页 <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/publish">发布</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							我的
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="/admin/personal_center">
-								<svg class="icon" aria-hidden="true">
-									<use xlink:href="#icon-gerenzhongxin1"></use>
-								</svg>个人中心
-							</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="/admin/news">
-								<svg class="icon" aria-hidden="true">
-									<use xlink:href="#icon-tongzhi"></use>
-								</svg>通知
-							</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="/admin/logout">
-								<svg class="icon" aria-hidden="true">
-									<use xlink:href="#icon-icon_logout"></use>
-								</svg>注销
-							</a>
-						</div>
-					</li>
-				</ul>
-				<form class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
-			</div>
-		</nav>
+		<% include ./common/header.ejs %>
 		<!--导航栏结束-->
 
 		<div class="container">
@@ -65,7 +21,7 @@
 					<div class="left-menu ">
 						<div class="head-img">
 							<img src="<%=userInfo.headimgSrc %>" title="点击换头像" class="rounded-circle m-t-xs img-responsive" data-toggle="modal" data-target="#head-img">
-							<span><a href=""><%=userInfo.userName %></a></span>
+							<span><a href="javascript:;"><%=userInfo.userName %></a></span>
 						</div>
 						<div class="list-group menu-list">
 							<a href="/admin/personal_center" class="list-group-item ">
@@ -94,7 +50,7 @@
 
 				<div class="col-sm-8">
 					<div class="right-content">
-						
+
 						<!--我的信息-->
 						<div class="my-news ">
 							<p>信息列表</p>
@@ -116,15 +72,41 @@
 										<input type="checkbox" class="i-checks">
 									</td>
 									<td>
-										<a href=""><%= newsInfo[i].postName%></a>
+										<a href="/user/user_info?userId=<%= newsInfo[i].postId%>">
+											<%= newsInfo[i].postName%>
+										</a>
 									</td>
 									<td>
-										<a href=""><%= newsInfo[i].title%></a>
+										<a href="javascript:;" data-toggle="modal" data-target="#<%= newsInfo[i]._id%>">
+											<%= newsInfo[i].title%>
+										</a>
 									</td>
-									<td class="text-right mail-date"><%= newsInfo[i].time%></td>
+									<td class="text-right mail-date">
+										<%= newsInfo[i].time%>
+									</td>
 								</tr>
-								<% } %>
 								
+								<!--内容详情模态框-->
+								<div class="modal fade" id="<%= newsInfo[i]._id%>" tabindex="-1" role="dialog" aria-labelledby="<%= newsInfo[i]._id%>" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myModalLabel"><%= newsInfo[i].title%></h4>
+											</div>
+											<div class="modal-body">
+												<div><%= newsInfo[i].content%></div>
+												<input type="text" value="<%= newsInfo[i].postId%>" class="hidden" id="receiveId"/>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+												<button type="button" class="btn btn-primary reply" >回复</button>
+											</div>
+										</div>
+									</div>
+								</div>
+									<!--内容详情模态框结束-->
+
+								<% } %>
 								<tr class="unread">
 									<td class="check-mail">
 										<input type="checkbox" class="i-checks">&nbsp;全选
@@ -142,53 +124,37 @@
 									</td>
 								</tr>
 							</table>
+							
+							<!--回复模态框-->
+							<div class="modal fade" id="replyModel" tabindex="-1" role="dialog" aria-labelledby="replyModel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myModalLabel">回复</h4>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<textarea id="msgValue" class="form-control" rows="10" placeholder="请回复..."></textarea>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+												<button type="button" class="btn btn-primary" id="reply">回复</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							<!--分页-->
-							<nav aria-label="Page navigation example">
-								<ul class="pagination justify-content-center  ">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1">上一页</a>
-									</li>
-									<li class="page-item active">
-										<a class="page-link " href="#">1</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">2</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">3</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">下一页</a>
-									</li>
-								</ul>
-							</nav>
+							<% include ./common/page.ejs %>
 							<!--分页结束-->
 						</div>
 						<!--我的消息结束-->
-						
-						<!--头像模态框-->
-						<div class="modal fade" id="head-img" tabindex="-1" role="dialog" aria-labelledby="head-img" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title" >头像设置</h4>
-									</div>
-									<div class="modal-body">
-										<div class="form-group">
-											<input type="file" class="form-control" id="picture" placeholder="">
-										</div>
-										
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-										<button type="button" class="btn btn-primary" id="modify">修改</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--头像模态框结束-->
 
-						
+						<!--头像模态框-->
+						<% include ./common/headimg.ejs %>
+						<!--头像模态框结束-->
+						<!--信息详情模态框-->
+
 					</div>
 				</div>
 

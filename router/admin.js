@@ -31,10 +31,11 @@ router.get("/personal_center",function(req,res){
 		}
 	})	
 });
+//管理员收藏作品接口
 router.get("/like_works",function(req,res){
 	Works.find({
 		likeUserId: req.cookies.userId
-	}).then(function(doc){
+	}).sort( { $natural: -1 } ).limit(10).then(function(doc){
 		if(doc){
 			res.render("like_works",{worksInfo:doc,userInfo:{"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc}})
 		}else{
@@ -42,10 +43,11 @@ router.get("/like_works",function(req,res){
 		}
 	})
 });
+//管理员作品数据接口
 router.get("/my_works",function(req,res){
 	Works.find({
 		userId: req.cookies.userId
-	}).then(function(doc){
+	}).sort( { $natural: -1 } ).limit(10).then(function(doc){
 		if(doc){
 			res.render("my_works",{worksInfo:doc,userInfo:{"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc}});
 		}else{
@@ -58,7 +60,7 @@ router.get("/my_works",function(req,res){
 router.get("/news",function(req,res){
 	News.find({
 		receiveId: req.cookies.userId
-	}).then(function(doc){
+	}).sort( { $natural: -1 } ).limit(10).then(function(doc){
 		if(doc){
 			res.render("news",{newsInfo:doc,userInfo:{"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc}});
 		}else{
