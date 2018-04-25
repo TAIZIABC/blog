@@ -40,3 +40,6 @@ body{background: #F5F5F5;}
 .news-list a{display: inline-block;width: 30%;line-height: 2rem; text-align: center;background-color: #D9DEE4;text-decoration: none;}
 .news-list a li{font-size: 1.3rem;}
 .news-list-item a{text-decoration: none;}
+.works-item-footer{
+	margin-top: 2rem;
+}

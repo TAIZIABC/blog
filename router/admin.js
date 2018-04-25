@@ -19,7 +19,7 @@ router.get("/",function(req,res){
 		res.render("index",{worksMsg:workMsg});
 	})
 });
-
+//管理员获取个人信息接口
 router.get("/personal_center",function(req,res){
 	User.findOne({
 		_id: req.cookies.userId
@@ -31,7 +31,7 @@ router.get("/personal_center",function(req,res){
 		}
 	})	
 });
-//管理员收藏作品接口
+//管理员获取收藏作品接口
 router.get("/like_works",function(req,res){
 	Works.find({
 		likeUserId: req.cookies.userId
@@ -43,7 +43,7 @@ router.get("/like_works",function(req,res){
 		}
 	})
 });
-//管理员作品数据接口
+//管理员获取作品数据接口
 router.get("/my_works",function(req,res){
 	Works.find({
 		userId: req.cookies.userId
@@ -56,7 +56,7 @@ router.get("/my_works",function(req,res){
 	})
 });
 
-
+//管理员获取消息接口
 router.get("/news",function(req,res){
 	News.find({
 		receiveId: req.cookies.userId

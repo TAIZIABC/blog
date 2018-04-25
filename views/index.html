@@ -33,14 +33,14 @@
 									<span class="name">发布人：<a href="/user/user_info?userId=<%=worksMsg[i].userId%>"><%=worksMsg[i].author%></a></span>
 								</div>
 								<hr />
-								<h5 class="card-title"><a href="works-message.html"><%=worksMsg[i].title%></a></h5>
+								<h5 class="card-title"><a href="/user/works?worksId=<%=worksMsg[i]._id%>"><%=worksMsg[i].title%></a></h5>
 								<p class="card-text"><%=worksMsg[i].content%></p>
 								<svg class="icon" aria-hidden="true">
 									<use xlink:href="#icon-pinglun"></use>
 								</svg><%=worksMsg[i].zan%>
 								<span style="margin-left: 1rem;"></span>
 								<svg class="icon" aria-hidden="true">
-									<use xlink:href="#icon-liulan3"></use>
+									<use xlink:href="#icon-shoucang"></use>
 								</svg><%=worksMsg[i].comment%>
 							</div>
 							<div class="card-footer">
@@ -52,28 +52,31 @@
 					</div>
 				</ul>
 			<div class="clearfix"></div>
-			<% include ./common/page.ejs %>
+			<!--分页-->
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1">上一页</a>
+					</li>
+					<li class="page-item active">
+						<a class="page-link " href="#">1</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">2</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">下一页</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 		<!--列表内容结束-->
 
 		<!--底部-->
-		<div class="footer">
-			<ul>
-				<li>
-					<a href="">关于我们</a>
-				</li>
-				<li>
-					<a href="">共建单位</a>
-				</li>
-				<li>
-					<a href="">联系方式</a>
-				</li>
-				<li>
-					<a href="">友情链接</a>
-				</li>
-			</ul>
-			<p>©2004-2016 教育部中国大学生在线网站 版权所有 京ICP备10028400号-2 京公安网备11010502025664</p>
-		</div>
+		<% include ./common/footer.ejs %>
 		<!--底部结束-->
 
 		<!--返回顶部-->
@@ -87,8 +90,8 @@
 				</button>
 		</div>
 		<!--返回顶部结束-->
-		<script src="../public/js/jquery.min.js"></script>
-		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_ljh2pjvbi03k57b9.js"></script>
+		<script src="public/js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_44gfsc9xnzlzyqfr.js"></script>
 		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<!--<script src="public/js/index.js"></script>-->
 	</body>

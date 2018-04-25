@@ -135,12 +135,21 @@
 		});
 //		提交数据
 		$("#submit").on('click',function(){
+			var title = $("#title").val();
+			var content = $("#content").val();
 			if(imgsSrc==""){
 				alert("请上传图片！");
 				return ;
+			}else if(title.length<1){
+				alert("标题不能为空！");
+				return ;
+			}else if(title.length>10){
+				alert("标题不能超过10个字！");
+				return ;
+			}else if(content.length<25){
+				alert("简介不少于25个字！");
+				return ;
 			}
-			var title = $("#title").val();
-			var content = $("#content").val();
 			$.ajax({
 				type:"post",
 				url: "/api/publish",
@@ -155,9 +164,9 @@
 					}
 				},
 				error: function(err){
-					console.log(err);
+					alert("发布失败，请稍后重试！");
 				}
-			})
+			});
 		})
 		
 	</script>

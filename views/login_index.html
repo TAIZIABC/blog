@@ -67,14 +67,14 @@
 									<span class="name">发布人：<a href="/user/user_info?userId=<%=worksMsg[i].userId%>"><%=worksMsg[i].author%></a></span>
 								</div>
 								<hr />
-								<h5 class="card-title"><a href="works-message.html"><%=worksMsg[i].title%></a></h5>
+								<h5 class="card-title"><a href="/user/works?worksId=<%=worksMsg[i]._id%>"><%=worksMsg[i].title%></a></h5>
 								<p class="card-text"><%=worksMsg[i].content%></p>
 								<svg class="icon" aria-hidden="true">
 									<use xlink:href="#icon-pinglun"></use>
 								</svg><%=worksMsg[i].zan%>
 								<span style="margin-left: 1rem;"></span>
 								<svg class="icon" aria-hidden="true">
-									<use xlink:href="#icon-liulan3"></use>
+									<use xlink:href="#icon-shoucang"></use>
 								</svg><%=worksMsg[i].comment%>
 							</div>
 							<div class="card-footer">
@@ -124,7 +124,7 @@
 		</div>
 		<!--返回顶部结束-->
 		<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_ljh2pjvbi03k57b9.js"></script>
+		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_44gfsc9xnzlzyqfr.js"></script>
 		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="public/js/distpicker.data.js"></script>
 		<script src="public/js/distpicker.js"></script>

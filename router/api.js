@@ -61,7 +61,7 @@ router.post("/login", function(req, res, next) {
 	})
 
 })
-
+//新用户注册接口
 router.post("/register", function(req, res) {
 	var userMsg = req.body;
 	//	用户名不能为空
@@ -120,7 +120,7 @@ router.post("/register", function(req, res) {
 		res.json(responseData);
 	})
 })
-//接受上传的文件
+//接受上传的文件接口
 router.post("/file_upload", function(req, res) {
 	var msg = {
 		info: '',
@@ -143,7 +143,7 @@ router.post("/file_upload", function(req, res) {
 		}
 	});
 })
-//接受上传的头像
+//接受上传的头像的接口
 router.post("/img_upload", function(req, res) {
 	var form = new multiparty.Form({
 		uploadDir: './public/images/up-touxian'
