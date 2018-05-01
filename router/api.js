@@ -6,6 +6,17 @@ var router = express.Router();
 var User = require("../models/user");
 var Works = require("../models/works");
 
+
+//对字数过滤的方法
+function LimitNumber(tex){
+	var str = tex;
+	for(var i=0;i<tex.length;i++){
+		if(tex[i].content.length>25){
+			str[i].content = tex[i].content.substr(0,25)+'。。。';
+		}
+	}
+	return str;
+};
 //定义统一的返回数据
 var responseData = {};
 router.get("/", function(req, res, next) {

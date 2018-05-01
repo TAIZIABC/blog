@@ -5,9 +5,25 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Works = require("./models/works")
 
+
+
+//对字数过滤的方法
+function LimitNumber(tex){
+	var str = tex;
+	for(var i=0;i<tex.length;i++){
+		if(tex[i].content.length>25){
+			str[i].content = tex[i].content.substr(0,25)+'。。。';
+		}
+	}
+	return str;
+};
+
+
+
+
+
+
 var app = express();
-
-
 //配置静态资源目录
 app.use("/public",express.static(__dirname + '/public'));
 //app.use(express.static(path.join(__dirname, 'public')));
@@ -27,7 +43,8 @@ app.get("/",function(req,res,next){
 		res.redirect("/admin");
 	}else{
 		Works.find().sort( { $natural: -1 } ).limit(8).then(function(doc){
-			res.render("login_index",{worksMsg: doc});
+			var workInfo = LimitNumber(doc);
+			res.render("login_index",{worksMsg: workInfo});
 		})
 	}
 })
@@ -48,6 +65,10 @@ mongoose.connect("mongodb://localhost/blog",function(err){
 		console.log("success");
 	}
 })
+
+
+
+
 
 
 

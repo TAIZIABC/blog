@@ -24,16 +24,7 @@ $("#register").on("click",function(){
 		}
 	})
 });
-//对字数过滤的方法
-function LimitNumber(tex){
-	var str;
-	if(tex.length>20){
-		str = tex.substr(0,20)+'...';
-	}else{
-		str = tex;
-	}
-	return str;
-}
+
 
 //登入方法
 $("#login").on("click",function(){
