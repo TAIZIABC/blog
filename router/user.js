@@ -63,7 +63,20 @@ router.post("/liuyan",function(req,res){
 			res.json({status:0,msg: '留言成功！'});
 		}
 	})
-})
+});
+//用户删除留言接口
+router.post("/delmsg",function(req,res){
+	var msgId = req.body.msgId;
+	News.remove({
+		_id: msgId
+	}).then(function(doc){
+		if(doc.n==1){
+			res.json({status:0,msg:"删除成功！"});
+		}else{
+			res.json({status:1,msg: "删除失败！"});
+		}
+	})
+});
 //作品详情接口
 router.get("/works",function(req,res){
 	var worksId = url.parse(req.url,true).query.worksId;
@@ -114,6 +127,15 @@ router.post("/comment",function(req,res){
 		replyList: [],
 		time: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
 		zan: 0
+	});
+	Works.update({
+		_id: worksId
+	},{
+		$inc: {comment: 1}
+	},function(err,doc){
+		if(err){
+			console.log(err);
+		}
 	});
 	comment.save(function(err,doc){
 		if(err){

@@ -7,7 +7,7 @@
 *{margin:0; padding:0;}
 li{list-style:none;}
 img{border:none;}
-a{text-decoration:none;}
+a{text-decoration:none !important;}
 .hidden{display: none;}
 .errMsg{text-align: center;color: red;}
 input,textarea{outline:none; resize:none; border:none;}

@@ -135,7 +135,115 @@
 		<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_44gfsc9xnzlzyqfr.js"></script>
 		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<script src="/public/js/main.js"></script>
+		<script src="/public/js/admin.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$(".comment-item-list").find(".reply-btn").on("click", function() {
+					$(".comment-item-list").find(".reply-box").hide();
+					$(".comment-item-list").find(".reply-box textarea").eq(index).removeClass("reply-input");
+					var index = $(".comment-item-list").find(".reply-btn").index(this);
+					$(".comment-item-list").find(".reply-box").eq(index).toggle();
+					$(".comment-item-list").find(".reply-box textarea").eq(index).addClass("reply-input");
+				})
+			})
+			
+//			收藏作品方法
+			$("#collect").on("click",function(){
+				if($("#userId").val()==""){
+					alert("请登入后收藏！");
+					return ;
+				}
+				var worksId = $("#worksId").val();
+				$.ajax({
+					url: "/user/collect",
+					type: "post",
+					data: {
+						worksId: worksId
+					},
+					success: function(data){
+						$(".post-like-btn").addClass("isCollect");
+						alert(data.msg);
+					},
+					error: function(err){
+						alert("收藏失败，请稍后重试！");
+					}
+				})
+			});
+//			提交评论方法	
+			$("#comment").on("click",function(){
+				var content = $(".comment-input").val();
+				var worksId = $("#worksId").val();
+				if($("#userId").val()==""){
+					alert("请登入后评论！");
+					return ;
+				}else if(content==""){
+					alert("评论内容不能为空！");
+					return ;
+				}
+				$.ajax({
+					url: "/user/comment",
+					type: "post",
+					data: {
+						content: content,
+						worksId: worksId
+					},
+					success: function(data){
+						if(data.status==0){
+							alert("评论成功！");
+							location.reload();
+						}
+					},
+					error: function(err){
+						console.log(err);
+					}
+				})
+			});
+//			评论点赞方法
+			function zan(commentId){
+				var num =parseInt($("#"+commentId).text());
+				$.ajax({
+					url: "/user/zan",
+					type: "post",
+					data: {
+						commentId: commentId
+					},
+					success: function(data){
+						if(data.status==0){
+							$("#"+commentId).html(++num);
+						}else{
+							alert("点赞失败，请稍后重试！");
+						}
+					},
+					error: function(err){
+						console.log(err);
+					}
+				})
+			};
+//			评论回复方法
+			function reply(commentId){
+				if($("#userId").val()==""){
+					alert("请登入后评论！");
+					return ;
+				}
+				console.log($(".reply-input").val());
+				$.ajax({
+					url: "/user/reply",
+					type: "post",
+					data: {
+						commentId: commentId,
+						content: $(".reply-input").val()
+					},
+					success: function(data){
+						location.reload();
+					},
+					error: function(err){
+						console.log(err);
+					}
+					
+				})
+			}
+			
+		</script>
 
 	</body>
 

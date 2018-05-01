@@ -26,10 +26,14 @@
 						<% for(var i=0;i<worksMsg.length;i++){ %>
 						<li class="col-md-3">
 						<div class="card">
-							<img class="card-img-top" src="<%=worksMsg[i].worksSrc[0]%>" alt="" />
+							<a href="/user/works?worksId=<%=worksMsg[i]._id%>">
+								<img class="card-img-top" src="<%=worksMsg[i].worksSrc[0]%>"  />
+							</a>
 							<div class="card-body">
 								<div class="item-user">
-									<img src="<%=worksMsg[i].authorHeadImg%>" alt="..." class="rounded-circle">
+									<a href="/user/user_info?userId=<%=worksMsg[i].userId%>">
+										<img src="<%=worksMsg[i].authorHeadImg%>"  class="rounded-circle">
+									</a>
 									<span class="name">发布人：<a href="/user/user_info?userId=<%=worksMsg[i].userId%>"><%=worksMsg[i].author%></a></span>
 								</div>
 								<hr />
@@ -37,11 +41,11 @@
 								<p class="card-text"><%=worksMsg[i].content%></p>
 								<svg class="icon" aria-hidden="true">
 									<use xlink:href="#icon-pinglun"></use>
-								</svg><%=worksMsg[i].zan%>
+								</svg><%=worksMsg[i].comment%>
 								<span style="margin-left: 1rem;"></span>
 								<svg class="icon" aria-hidden="true">
 									<use xlink:href="#icon-shoucang"></use>
-								</svg><%=worksMsg[i].comment%>
+								</svg><%=worksMsg[i].likeUserId.length%>
 							</div>
 							<div class="card-footer">
 								<small class="text-muted">发布于：<%=worksMsg[i].time%></small>
@@ -53,6 +57,8 @@
 				</ul>
 			<div class="clearfix"></div>
 			<!--分页-->
+			
+			<% if(worksMsg.length>0){ %>
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 					<li class="page-item disabled">
@@ -72,6 +78,7 @@
 					</li>
 				</ul>
 			</nav>
+			<%    }  %>
 		</div>
 		<!--列表内容结束-->
 
