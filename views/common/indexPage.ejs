@@ -1,0 +1,13 @@
+<% if(worksMsg.length>0){ %>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<li class="page-item ">
+				<a class="page-link" href="/?action=pre">上一页</a>
+			</li>
+			<span style="line-height: 38px;">第<%=page+1%>/<%=pageNumber%>页</span>
+			<li class="page-item">
+				<a class="page-link" href="/?action=next">下一页</a>
+			</li>
+		</ul>
+	</nav>
+<%    }  %>

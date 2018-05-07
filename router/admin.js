@@ -1,6 +1,6 @@
 const express = require("express");
-
 var router = express.Router();
+const url = require("url");
 const User = require("../models/user");
 const Works = require("../models/works");
 const News = require("../models/news");
@@ -25,13 +25,33 @@ router.get("*",function(req,res,next){
 	}
 	next();
 });
-
+//分页变量
+var page = 0;
+var pageNumber;
+const LIMITNUM = 8;
+//管理员首页
 router.get("/",function(req,res){
-	Works.find().sort( { $natural: -1 } ).limit(8).then(function(workMsg){
+	console.log(req.url);
+	var value = req.query.value;
+	var rgex = new RegExp(value);
+	if(req.query.action==='pre'){
+		page = page -1;
+		page = Math.max(page,0);
+	}else if(req.query.action==='next'){
+		page = page + 1;
+		page = Math.min(page,pageNumber-1);
+	}else{
+		page = 0;
+	}
+	Works.find({title:rgex}).count(function(err,doc){
+		pageNumber = Math.ceil(doc/8);
+	});
+	Works.find({title:rgex}).sort( { $natural: -1 } ).limit(LIMITNUM).skip(page*LIMITNUM).then(function(workMsg){
 		var msgInfo = LimitNumber(workMsg);
-		res.render("index",{worksMsg:msgInfo});
-	})
+		res.render("index",{worksMsg:msgInfo,page,pageNumber});
+	});
 });
+
 //管理员获取个人信息接口
 router.get("/personal_center",function(req,res){
 	User.findOne({
@@ -46,12 +66,24 @@ router.get("/personal_center",function(req,res){
 });
 //管理员获取收藏作品接口
 router.get("/like_works",function(req,res){
-	var userInfo = {"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc,userId:req.cookies.userId}
+	var userInfo = {"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc,userId:req.cookies.userId};
+	if(req.query.action==='pre'){
+		page = page -1;
+		page = Math.max(page,0);
+	}else if(req.query.action==='next'){
+		page = page + 1;
+		page = Math.min(page,pageNumber-1);
+	}else{
+		page = 0;
+	}
+	Works.find({likeUserId: req.cookies.userId}).count(function(err,doc){
+		pageNumber = Math.ceil(doc/8);
+	});
 	Works.find({
 		likeUserId: req.cookies.userId
-	}).sort( { $natural: -1 } ).limit(10).then(function(doc){
+	}).sort( { $natural: -1 } ).limit(LIMITNUM).skip(page*LIMITNUM).then(function(doc){
 		if(doc){
-			res.render("like_works",{worksInfo:doc,userInfo:userInfo})
+			res.render("like_works",{worksInfo:doc,page,pageNumber,userInfo})
 		}else{
 			console.log("none");
 		}
@@ -59,11 +91,23 @@ router.get("/like_works",function(req,res){
 });
 //管理员获取作品数据接口
 router.get("/my_works",function(req,res){
+	if(req.query.action==='pre'){
+		page = page -1;
+		page = Math.max(page,0);
+	}else if(req.query.action==='next'){
+		page = page + 1;
+		page = Math.min(page,pageNumber-1);
+	}else{
+		page = 0;
+	}
+	Works.find({userId: req.cookies.userId}).count(function(err,doc){
+		pageNumber = Math.ceil(doc/8);
+	});
 	Works.find({
 		userId: req.cookies.userId
-	}).sort( { $natural: -1 } ).limit(10).then(function(doc){
+	}).sort( { $natural: -1 } ).limit(LIMITNUM).skip(page*LIMITNUM).then(function(doc){
 		if(doc){
-			res.render("my_works",{worksInfo:doc,userInfo:{"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc}});
+			res.render("my_works",{worksInfo:doc,page,pageNumber,userInfo:{"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc}});
 		}else{
 			console.log("none");
 		}
@@ -72,11 +116,23 @@ router.get("/my_works",function(req,res){
 
 //管理员获取消息接口
 router.get("/news",function(req,res){
+	if(req.query.action==='pre'){
+		page = page -1;
+		page = Math.max(page,0);
+	}else if(req.query.action==='next'){
+		page = page + 1;
+		page = Math.min(page,pageNumber-1);
+	}else{
+		page = 0;
+	}
+	News.find({receiveId: req.cookies.userId}).count(function(err,doc){
+		pageNumber = Math.ceil(doc/8);
+	});
 	News.find({
 		receiveId: req.cookies.userId
-	}).sort( { $natural: -1 } ).limit(10).then(function(doc){
+	}).sort( { $natural: -1 } ).limit(LIMITNUM).skip(page*LIMITNUM).then(function(doc){
 		if(doc){
-			res.render("news",{newsInfo:doc,userInfo:{"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc}});
+			res.render("news",{newsInfo:doc,page,pageNumber,userInfo:{"userName":req.cookies.userName,"headimgSrc":req.cookies.headimgSrc}});
 		}else{
 			console.log("none");
 		}

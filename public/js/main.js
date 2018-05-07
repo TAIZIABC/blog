@@ -92,7 +92,6 @@ $("#liuYan").on("click",function(){
 		return ;
 	}
 	if($("#msgValue").val()!=''){
-		console.log($("#msgValue").val());
 		$.ajax({
 			url: "/user/liuyan",
 			type: "post",
@@ -381,4 +380,16 @@ $.ajax({
 			console.log(err);
 		}
 	})
-}
+};
+//搜索方法
+$("#searchBtn").on('click',function(){
+	var seachText =$("#seachText").val();
+	var currentUrl =window.location.href;
+	var index = currentUrl.indexOf('?')
+	if(index>0){
+		var newUrl = currentUrl.substr(0,index)+'?value='+seachText;
+	}else{
+		var newUrl = currentUrl+'?value='+seachText;
+	}
+	location.href = newUrl;
+})

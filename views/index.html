@@ -55,31 +55,23 @@
 					<%  } %>
 					</div>
 				</ul>
+			</div>
 			<div class="clearfix"></div>
 			<!--分页-->
 			
 			<% if(worksMsg.length>0){ %>
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-					<li class="page-item disabled">
-						<a class="page-link" href="#" tabindex="-1">上一页</a>
+					<li class="page-item ">
+						<a class="page-link" href="/admin?action=pre">上一页</a>
 					</li>
-					<li class="page-item active">
-						<a class="page-link " href="#">1</a>
-					</li>
+					<span style="line-height: 38px;">第<%=page+1%>/<%=pageNumber%>页</span>
 					<li class="page-item">
-						<a class="page-link" href="#">2</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">3</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">下一页</a>
+						<a class="page-link" href="/admin?action=next">下一页</a>
 					</li>
 				</ul>
 			</nav>
 			<%    }  %>
-		</div>
 		<!--列表内容结束-->
 
 		<!--底部-->
@@ -100,7 +92,7 @@
 		<script src="public/js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_44gfsc9xnzlzyqfr.js"></script>
 		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<!--<script src="public/js/index.js"></script>-->
+		<script src="/public/js/main.js"></script>
 	</body>
 
 </html>

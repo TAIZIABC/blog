@@ -38,14 +38,29 @@ app.use(bodyParser.urlencoded({extended:false}));
   app.engine('.html', require('ejs').__express);  
   app.set('view engine', 'html'); 
 
+	
+	var page = 0;
+	var pageNumber;
 app.get("/",function(req,res,next){
 	if(req.cookies.userId){
 		res.redirect("/admin");
 	}else{
-		Works.find().sort( { $natural: -1 } ).limit(8).then(function(doc){
-			var workInfo = LimitNumber(doc);
-			res.render("login_index",{worksMsg: workInfo});
-		})
+			if(req.query.action==='pre'){
+				page = page -1;
+				page = Math.max(page,0);
+			}else if(req.query.action==='next'){
+				page = page + 1;
+				page = Math.min(page,pageNumber-1);
+			}else{
+				page = 0;
+			}
+			Works.find().then(function(doc){
+				pageNumber = Math.ceil(doc.length/8);
+			});
+			Works.find().sort( { $natural: -1 } ).limit(8).skip(page*8).then(function(doc){
+				var workInfo = LimitNumber(doc);
+				res.render("login_index",{worksMsg: workInfo,page,pageNumber});
+			});
 	}
 })
 

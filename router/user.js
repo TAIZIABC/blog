@@ -33,12 +33,26 @@ router.get("/user_info",function(req,res,next){
 	})
 });
 //用户作品接口
+var page = 0;
+var pageNumber;
 router.get("/user_works",function(req,res){
+	if(req.query.action==='pre'){
+		page = page -1;
+		page = Math.max(page,0);
+	}else if(req.query.action==='next'){
+		page = page + 1;
+		page = Math.min(page,pageNumber-1);
+	}else{
+		page = 0;
+	}
 	var userId = url.parse(req.url,true).query;
+	Works.find({userId: userId.userId}).count(function(err,doc){
+		pageNumber = Math.ceil(doc/8);
+	});
 	Works.find({
 		userId: userId.userId
-	}).limit(10).then(function(doc){
-		res.render("user_works",{worksInfo:doc,userID:req.cookies.userId});
+	}).limit(8).skip(page*8).then(function(doc){
+		res.render("user_works",{worksInfo:doc,userID:req.cookies.userId,page,pageNumber});
 	})
 });
 //用户留言接口

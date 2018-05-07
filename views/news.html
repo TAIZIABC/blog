@@ -147,7 +147,17 @@
 								</div>
 							<!--分页-->
 							<% if(newsInfo.length>0){ %>
-								<% include ./common/page.ejs %>
+								<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<li class="page-item ">
+										<a class="page-link" href="/admin/news?action=pre">上一页</a>
+									</li>
+									<span style="line-height: 38px;">第<%=page+1%>/<%=pageNumber%>页</span>
+									<li class="page-item">
+										<a class="page-link" href="/admin/news?action=next">下一页</a>
+									</li>
+								</ul>
+								</nav>
 							<%    }  %>
 							<!--分页结束-->
 						</div>
