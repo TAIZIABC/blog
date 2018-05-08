@@ -31,9 +31,21 @@ var pageNumber;
 const LIMITNUM = 8;
 //管理员首页
 router.get("/",function(req,res){
-	console.log(req.url);
+//	向分页添加接口
+	var url = req.url;
+	if(url.indexOf('?')>0){
+		if(url.indexOf('action')>0){
+			url = '/admin'+ url.substr(0,url.indexOf('action'));
+		}else{
+			url = '/admin' + url + '&';
+		}
+	}else{
+		url = '/admin'+ url + '?';
+	}
+//	搜索功能
 	var value = req.query.value;
 	var rgex = new RegExp(value);
+//	分页功能
 	if(req.query.action==='pre'){
 		page = page -1;
 		page = Math.max(page,0);
@@ -43,12 +55,13 @@ router.get("/",function(req,res){
 	}else{
 		page = 0;
 	}
+//	获取页数
 	Works.find({title:rgex}).count(function(err,doc){
 		pageNumber = Math.ceil(doc/8);
 	});
 	Works.find({title:rgex}).sort( { $natural: -1 } ).limit(LIMITNUM).skip(page*LIMITNUM).then(function(workMsg){
 		var msgInfo = LimitNumber(workMsg);
-		res.render("index",{worksMsg:msgInfo,page,pageNumber});
+		res.render("index",{worksMsg:msgInfo,page,pageNumber,url});
 	});
 });
 

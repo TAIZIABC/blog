@@ -5,9 +5,9 @@
 		<meta charset="UTF-8">
 		<title>主页</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<link rel="stylesheet" href="public/css/index.css" />
+		<link rel="stylesheet" href="/public/css/index.css" />
 		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<link rel="shortcut icon" href="public/images/favicon.ico">
+		<link rel="shortcut icon" href="/public/images/favicon.ico">
 	</head>
 
 	<body>
@@ -58,22 +58,7 @@
 			</div>
 			<div class="clearfix"></div>
 			<!--分页-->
-			
-			<% if(worksMsg.length>0){ %>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<li class="page-item ">
-						<a class="page-link" href="/admin?action=pre">上一页</a>
-					</li>
-					<span style="line-height: 38px;">第<%=page+1%>/<%=pageNumber%>页</span>
-					<li class="page-item">
-						<a class="page-link" href="/admin?action=next">下一页</a>
-					</li>
-				</ul>
-			</nav>
-			<%    }  %>
-		<!--列表内容结束-->
-
+			<% include ./common/indexPage.ejs %>
 		<!--底部-->
 		<% include ./common/footer.ejs %>
 		<!--底部结束-->
@@ -89,7 +74,7 @@
 				</button>
 		</div>
 		<!--返回顶部结束-->
-		<script src="public/js/jquery-3.1.0.min.js"></script>
+		<script src="/public/js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_44gfsc9xnzlzyqfr.js"></script>
 		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="/public/js/main.js"></script>
