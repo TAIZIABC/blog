@@ -54,22 +54,11 @@
 						<!--我的信息-->
 						<div class="my-news ">
 							<p>信息列表</p>
-							<ul class="news-list">
-								<a href="javascript:;" class="now">
-									<li>全部信息</li>
-								</a>
-								<a href="javascript:;">
-									<li>未读消息</li>
-								</a>
-								<a href="javascript:;">
-									<li>已读消息</li>
-								</a>
-							</ul>
 							<table class="table table-hover news-list-item">
 								<% for(var i=0;i<newsInfo.length;i++){ %>
 								<tr class="unread">
 									<td class="check-mail">
-										<input type="checkbox" class="i-checks">
+										<input type="checkbox" class="i-checks" value="<%= newsInfo[i]._id%>">
 									</td>
 									<td>
 										<a href="/user/user_info?userId=<%= newsInfo[i].postId%>">
@@ -105,25 +94,25 @@
 										</div>
 									</div>
 								</div>
-									<!--内容详情模态框结束-->
-
 								<% } %>
+								<!--内容详情模态框结束-->
+								<% if(newsInfo.length>0){ %>
 								<tr class="unread">
 									<td class="check-mail">
-										<input type="checkbox" class="i-checks">&nbsp;全选
+										<input type="checkbox" class="" id="allSelected">&nbsp;全选
 									</td>
 									<td colspan="3">
 										<button class="btn btn-white btn-sm" title="刷新"><svg class="icon" aria-hidden="true">
 											<use xlink:href="#icon-shuaxin2"></use></svg>
 										</button>
-										<button class="btn btn-white btn-sm" title="标为已读"><svg class="icon" aria-hidden="true">
-											<use xlink:href="#icon-liulan3"></use></svg>
-										</button>
-										<button class="btn btn-white btn-sm" title="标为重要"><svg class="icon" aria-hidden="true">
-											<use xlink:href="#icon-tanhao-"></use></svg>
+										<button class="btn btn-white btn-sm" title="删除" id="delMsg"><svg class="icon" aria-hidden="true">
+											<use xlink:href="#icon-shanchu"></use></svg>
 										</button>
 									</td>
 								</tr>
+								<%    }else{  %>
+									<div style="font-size: 16px;text-align: center;">暂无消息</div>
+								<%  }   %>
 							</table>
 							
 							<!--回复模态框-->
@@ -166,8 +155,6 @@
 						<!--头像模态框-->
 						<% include ./common/headimg.ejs %>
 						<!--头像模态框结束-->
-						<!--信息详情模态框-->
-
 					</div>
 				</div>
 
@@ -177,6 +164,38 @@
 		<script type="text/javascript" src="//at.alicdn.com/t/font_486809_ebype8x5nfzs38fr.js"></script>
 		<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="/public/js/main.js"></script>
+		<script>
+			var allSele = false;
+			$("#allSelected").on('click',function(){
+				allSele = !allSele;
+				$(".i-checks").prop("checked",allSele);
+			});
+			$("#delMsg").on('click',function(){
+				var arr = [];
+				var checkList = $("input:checkbox:checked");
+				for(var i = 0 ;i<checkList.length;i++){
+					arr.push(checkList[i].value);
+				}
+				$.ajax({
+					type:'get',
+					url: '/user/delmsgs',
+					data: {
+						idAll: arr
+					},
+					success: function(data){
+						if(data.status==0){
+							location.reload();
+						}else{
+							alert('删除失败！');
+						}
+					},
+					error: function(err){
+						console.log(err);
+					}
+				})
+			})
+			
+		</script>
 	</body>
 
 </html>

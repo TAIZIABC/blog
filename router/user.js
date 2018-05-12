@@ -91,6 +91,17 @@ router.post("/delmsg",function(req,res){
 		}
 	})
 });
+//用户删除留言接口
+router.get("/delmsgs",function(req,res){
+	var msgId = req.query.idAll;
+	for(var i = 0;i<msgId.length;i++){
+		News.remove({
+		_id: msgId[i]
+		}).then(function(doc){
+		})
+	}
+	res.json({status:0,msg:"删除成功！"});
+});
 //作品详情接口
 router.get("/works",function(req,res){
 	var worksId = url.parse(req.url,true).query.worksId;
